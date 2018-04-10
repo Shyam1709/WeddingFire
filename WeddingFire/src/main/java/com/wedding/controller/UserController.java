@@ -31,8 +31,9 @@ public class UserController {
 	public ResponseEntity<Map<String, String>> add(@Valid @RequestBody User user, BindingResult result) {
 		Map<String, String> response = new HashMap<String, String>();
 		if (result.hasErrors()) {
-result.getFieldErrors().stream().forEach(err -> System.out.println(err.getField() + ": " + err.getDefaultMessage()));
-			response.put("error_password", String.valueOf(result.getAllErrors()));
+			result.getFieldErrors().stream()
+					.forEach(err -> System.out.println(err.getField() + ": " + err.getDefaultMessage()));
+			response.put("error", String.valueOf(result));
 			return ResponseEntity.badRequest().body(response);
 		} else {
 			userRepository.save(user);
@@ -42,6 +43,7 @@ result.getFieldErrors().stream().forEach(err -> System.out.println(err.getField(
 
 	}
 
+	// to authenticate user by validating login credentials
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map<String, String>> login(@RequestBody User user) {
 		Map<String, String> response = new HashMap<String, String>();

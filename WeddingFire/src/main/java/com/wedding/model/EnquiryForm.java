@@ -51,5 +51,4 @@ public class EnquiryForm {
 	public void setQuery_message(String query_message) {
 		this.query_message = query_message;
 	}
-
 }
