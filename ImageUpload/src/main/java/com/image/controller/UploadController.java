@@ -20,6 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class UploadController {
 	
+	 @RequestMapping("/test")
+	    public String index() {
+	        return "index";
+	    }
+	
 	@PostMapping("/file/upload")
 	public String upload(@RequestParam("file") MultipartFile file) {
 		String uploadPath = "src/main/resources/images/";
